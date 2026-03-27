@@ -8,14 +8,14 @@ This mod may not be compatible with other pre-existing mods.
 
 # Current Features
 ## Jokers
-- 30 Common Jokers
-- 15 Uncommon Jokers
-- 15 Rare Jokers
+- 30/30 Common Jokers
+- 30/30 Uncommon Jokers
+- 23/30 Rare Jokers
+- 6/30 Divine Jokers
 - 1 Legendary Joker
-- 5 Divine Jokers
 ## Consumables
 - 10 Sephirot Cards
-- 6 Divine Cards
+- 7 Divine Cards
 ## Modifiers
 - 3 Enhancements
 - 1 Edition
@@ -37,3 +37,4 @@ This mod may not be compatible with other pre-existing mods.
 # Known Bugs
 - Divine Jokers do not fully work. (Fixed in the upcoming v1.6.0)
 - Plant Party and Defaced do not work together.
+- Not all v1.7.0 Jokers are implemented yet, nor is their art.
