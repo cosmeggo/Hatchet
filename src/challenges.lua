@@ -77,7 +77,7 @@ SMODS.Challenge {
             { s = 'S', r = '4' },
             { s = 'S', r = '3' },
             { s = 'S', r = '2' },
-            { s = 'S', r = 'A' },     -- Spade Deck 1
+            { s = 'S', r = 'A' }, -- Spade Deck 1
             { s = 'S', r = 'K' },
             { s = 'S', r = 'Q' },
             { s = 'S', r = 'J' },
@@ -90,7 +90,7 @@ SMODS.Challenge {
             { s = 'S', r = '4' },
             { s = 'S', r = '3' },
             { s = 'S', r = '2' },
-            { s = 'S', r = 'A' },     -- Spade Deck 2
+            { s = 'S', r = 'A' }, -- Spade Deck 2
             { s = 'S', r = 'K' },
             { s = 'S', r = 'Q' },
             { s = 'S', r = 'J' },
@@ -103,7 +103,7 @@ SMODS.Challenge {
             { s = 'S', r = '4' },
             { s = 'S', r = '3' },
             { s = 'S', r = '2' },
-            { s = 'S', r = 'A' },     -- Spade Deck 3
+            { s = 'S', r = 'A' }, -- Spade Deck 3
             { s = 'S', r = 'K' },
             { s = 'S', r = 'Q' },
             { s = 'S', r = 'J' },
@@ -116,7 +116,7 @@ SMODS.Challenge {
             { s = 'S', r = '4' },
             { s = 'S', r = '3' },
             { s = 'S', r = '2' },
-            { s = 'S', r = 'A' },     -- Spade Deck 4
+            { s = 'S', r = 'A' }, -- Spade Deck 4
         },
     },
 
@@ -139,7 +139,7 @@ SMODS.Challenge {
             { id = 'j_lusty_joker' },
             { id = 'j_wrathful_joker' },
             { id = 'j_gluttenous_joker' },
-            { id = 'c_lovers' },      -- Tarots
+            { id = 'c_lovers' }, -- Tarots
             { id = 'c_tower' },
             { id = 'c_sun' },
             { id = 'c_moon' },
@@ -169,7 +169,7 @@ SMODS.Challenge {
     },
     jokers = {
         { id = 'j_hatch_slipperyslope', eternal = true },
-        { id = 'j_hatch_handsdown',   eternal = true },
+        { id = 'j_hatch_handsdown',     eternal = true },
     },
     loc_txt = {
         ['name'] = 'Stock Market',

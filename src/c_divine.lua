@@ -426,3 +426,83 @@ SMODS.Consumable {
             G.jokers.highlighted[1].config.center.key == "j_hatch_fourleaf" -- The Original Joker
     end
 }
+
+-- Soul of Trousers
+SMODS.Consumable {
+    key = 'soul_of_trousers',
+    set = 'divine',
+    pos = { x = 6, y = 1 },
+    loc_txt = {
+        name = 'Soul of Clover',
+        text = {
+            [1] = 'A mysterious card with',
+            [2] = 'a {C:enhanced}unique effect{}',
+            [3] = '{C:inactive}(Cannot be used on',
+            [4] = '{C:inactive}stickered Jokers){}'
+        }
+    },
+    cost = 3,
+    unlocked = true,
+    discovered = false,
+    hidden = false,
+    can_repeat_soul = false,
+    atlas = 'CustomConsumables',
+    
+    use = function(self, card, area, copier) -- Sound event
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('hatch_mega')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+
+        for i = 1, #G.jokers.highlighted do -- Flip Animation #1
+            local percent = 1.15 - (i - 0.999) / (#G.jokers.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.jokers.highlighted[i]:flip()
+                    play_sound('card1', percent)
+                    G.jokers.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        delay(0.2)
+        for i = 1, #G.jokers.highlighted do -- Set Ability
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.4,
+                func = function()
+                    local evolution = G.jokers.highlighted[1]
+                    evolution:set_ability("j_hatch_divine_trousers") -- The Divine Joker
+                    card:juice_up(0.3, 0.5)
+                    return true
+                end
+            }))
+        end
+        delay(0.2)
+        for i = 1, #G.jokers.highlighted do -- Flip Animation #2
+            local percent = 0.85 + (i - 0.999) / (#G.jokers.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.jokers.highlighted[i]:flip()
+                    G.jokers.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        SMODS.calculate_effect({message = "Evolve!", colour = G.C.SECONDARY_SET.Spectral}, G.jokers.highlighted[1])
+        delay(0.5)
+    end,
+    can_use = function(self, card)
+        return G.jokers and G.jokers.highlighted and #G.jokers.highlighted == 1 and
+            G.jokers.highlighted[1].config.center.key == "j_trousers" -- The Original Joker
+    end
+}

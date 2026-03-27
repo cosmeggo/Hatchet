@@ -1,13 +1,13 @@
--- Orange Deck
+-- Chevron Deck
 SMODS.Back {
-    key = 'orange_deck',
+    key = 'chevron',
     pos = { x = 0, y = 0 },
     config = {hand_size = -2, discards = 2},
     loc_txt = {
-        name = 'Orange Deck',
+        name = 'Chevron Deck',
         text = {
-            [1] = '{C:attention}-2{} hand size',
-            [2] = '{C:red}+2{} discards every round'
+            '{C:attention}-2{} hand size',
+            '{C:red}+2{} discards every round'
         },
     },
     unlocked = true,
@@ -21,14 +21,14 @@ SMODS.Back {
 
 -- Holy Deck
 SMODS.Back {
-    key = 'holy_deck',
+    key = 'holy',
     pos = { x = 1, y = 0 },
     config = { sephirot_rate = 2, consumables = { 'c_hatch_kether' }  },
     loc_txt = {
         name = 'Holy Deck',
         text = {
-            [1] = '{C:green}Sephirot{} cards may appear in the',
-            [2] = 'shop, start with a {C:green}Kether{} card'
+            '{C:green}Sephirot{} cards may appear in the',
+            'shop, start with a {C:green}Kether{} card'
         },
     },
     unlocked = true,
@@ -46,14 +46,14 @@ SMODS.Back {
     end
 }
 
--- Indigo Deck
+-- Harlequin Deck
 SMODS.Back {
-    key = 'indigo_deck',
+    key = 'harlequin',
     pos = { x = 2, y = 0 },
     loc_txt = {
-        name = 'Indigo Deck',
+        name = 'Harlequin Deck',
         text = {
-            [1] = '{C:attention}+1{} booster pack per shop',
+            '{C:attention}+1{} booster pack per shop',
         },
     },
     unlocked = false,
@@ -69,17 +69,17 @@ SMODS.Back {
     end
 }
 
--- Violet Deck
+-- Pilot Deck
 SMODS.Back {
-    key = 'violet_deck',
+    key = 'pilot',
     pos = { x = 3, y = 0 },
-    config = {hands = 1, discards = 1, ante_scaling = 2},
+    config = { vouchers = { 'v_reroll_surplus', 'v_clearance_sale' } },
     loc_txt = {
-        name = 'Violet Deck',
+        name = 'Pilot Deck',
         text = {
-            [1] = '{C:chips}+1{} hand and {C:mult}+1{}',
-            [2] = 'discard every round',
-            [3] = '{C:attention}X2{} base Blind size'
+            'Start run with',
+            '{C:green}#1#{},',
+            'and {C:attention}#2#{}',
         },
     },
     unlocked = false,
@@ -87,7 +87,11 @@ SMODS.Back {
     atlas = 'CustomDecks',
 
     loc_vars = function(self, info_queue, back)
-        return { vars = { self.config.hands, self.config.discards, self.config.ante_scaling } }
+        return {
+            vars = { localize { type = 'name_text', key = self.config.vouchers[1], set = 'Voucher' },
+                localize { type = 'name_text', key = self.config.vouchers[2], set = 'Voucher' },
+            }
+        }
     end,
 
     check_for_unlock = function(self, args)
