@@ -11,6 +11,7 @@ cassknows (divine shader)
 == Programming Help ==
 
 N'
+NopeTooFast
 ThunderEdge
 nh6574
 Eremel
@@ -33,5 +34,4 @@ Breuhh
 Sushi
 breuhh
 Jabon
-Potato Patch Modding Hub
 Everyone who has helped me with programming!
