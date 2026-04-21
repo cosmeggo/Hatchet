@@ -3993,7 +3993,7 @@ SMODS.Joker({
     key = "treasure",
     config = { extra = { dollars = 5 } },
     loc_txt = {
-        ["name"] = "Plea Deal",
+        ["name"] = "Treasure Chest",
         ["text"] = {
             {
                 "Earn {C:money}$5{} if all cards",
