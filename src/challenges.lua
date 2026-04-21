@@ -178,3 +178,17 @@ SMODS.Challenge {
         }
     },
 }
+
+-- Sky High
+SMODS.Challenge {
+    key = 'skyhigh',
+    jokers = {
+        { id = 'j_hatch_paperplane', eternal = true },
+    },
+    loc_txt = {
+        ['name'] = 'Paper Plane',
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+}

@@ -2308,14 +2308,15 @@ SMODS.Joker {
     key = "plantparty",
     config = {
         extra = {
-            xmult = 1
+            xmult = 1,
+            xmult_mod = 0.2
         }
     },
     loc_txt = {
         ['name'] = 'Plant Party',
         ['text'] = {
             'All face cards are debuffed',
-            '{X:red,C:white}X0.2{} Mult for each {C:attention}played hand {}',
+            'Gain {X:red,C:white}X#2#{} Mult each {C:attention}played hand{}',
             '{C:inactive}(Currently{} {X:red,C:white}X#1#{}{}{C:inactive} Mult){}'
         },
         ['unlock'] = {
@@ -2341,17 +2342,17 @@ SMODS.Joker {
 
 
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.xmult } }
+        return { vars = { card.ability.extra.xmult, card.ability.extra.xmult_mod } }
     end,
 
     calculate = function(self, card, context)
         if context.debuff_card and context.debuff_card:is_face() then
             return { debuff = true }
         end
-        if context.cardarea == G.jokers and context.joker_main then
-            card.ability.extra.xmult = (card.ability.extra.xmult) + 0.2
+        if context.joker_main then
+            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_mod
             return {
-                Xmult = card.ability.extra.xmult
+                xmult = card.ability.extra.xmult
             }
         end
     end
@@ -2484,14 +2485,14 @@ SMODS.Joker {
     key = "cave",
     config = {
         extra = {
-            Xmult = 1.5
+            xchips = 1.5
         }
     },
     loc_txt = {
         ['name'] = 'Cave',
         ['text'] = {
             'Each {C:attention}Stone{} card held in',
-            'hand gives {X:red,C:white}X1.5{} Mult'
+            'hand gives {X:blue,C:white}X1.5{} Chips'
         },
         ['unlock'] = {
             'Unlocked by default.'
@@ -2520,7 +2521,7 @@ SMODS.Joker {
         if context.individual and context.cardarea == G.hand and not context.end_of_round then
             if SMODS.get_enhancements(context.other_card)["m_stone"] == true then
                 return {
-                    Xmult = card.ability.extra.Xmult
+                    xchips = card.ability.extra.xchips
                 }
             end
         end
@@ -3959,8 +3960,9 @@ SMODS.Joker({
         ["name"] = "Plea Deal",
         ["text"] = {
             {
-                "At the start of round, {C:red}discards{}",
-                "are added to {C:attention}hand size{}",
+                "At the start of round",
+                "{C:red}discards{} are added",
+                "to {C:attention}hand size{}",
             }
         },
     },
@@ -3995,7 +3997,8 @@ SMODS.Joker({
         ["text"] = {
             {
                 "Earn {C:money}$5{} if all cards",
-                "held in hand are {C:hearts}Hearts{} or {C:diamonds}Diamonds{}",
+                "held in hand are",
+                "{C:hearts}Hearts{} or {C:diamonds}Diamonds{}",
             }
         },
     },
@@ -4077,12 +4080,12 @@ SMODS.Joker({
     end
 })
 
--- Room No. 2024
+-- Room No. 202
 SMODS.Joker({
-    key = "room2024",
+    key = "room202",
     config = { extra = { h_size = 0, h_mod = 1 } },
     loc_txt = {
-        ["name"] = "Room No. 2024",
+        ["name"] = "Room No. 202",
         ["text"] = {
             {
                 "If played hand contains a {C:attention}#2#{}",
@@ -4139,7 +4142,7 @@ SMODS.Joker({
         ["name"] = "Paper Plane",
         ["text"] = {
             {
-                "If played hand contains a {C:attention}#3#{}",
+                "If played hand is a {C:attention}#3#{}",
                 "this Joker gains {C:white,X:mult}X#2#{} Mult",
                 '{C:inactive}(Currently{} {C:white,X:mult}X#1#{} {C:inactive}Mult){}',
             }
@@ -4295,7 +4298,7 @@ SMODS.Joker({
         ["name"] = "Clock Tower",
         ["text"] = {
             {
-                "Create a {C:spectral}Spectral{}",
+                "Create a {C:tarot}Divine Card{}",
                 "every {C:attention}#1#{} hands played",
                 "{C:inactive}(#2#){}",
                 "{C:inactive,s:0.8}(Must have room){}"
@@ -4334,7 +4337,7 @@ SMODS.Joker({
                 return {
                     G.E_MANAGER:add_event(Event({
                         func = function()
-                            SMODS.add_card { set = 'Spectral', }
+                            SMODS.add_card { set = 'hatch_divine', }
                             G.GAME.consumeable_buffer = 0
                             return true
                         end
@@ -4510,7 +4513,8 @@ SMODS.Joker({
         ["text"] = {
             {
                 "Create a {C:green}Sephirot{} card",
-                "when {C:attention}Blind{} is skipped"
+                "when {C:attention}Blind{} is skipped",
+                "{C:inactive}(Must have room){}"
             }
         },
     },

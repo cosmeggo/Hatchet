@@ -80,6 +80,7 @@ SMODS.Consumable {
                 func = function()
                     local evolution = G.jokers.highlighted[1]
                     evolution:set_ability("j_hatch_divine_hatchet") -- The Divine Joker
+                    evolution:set_edition("e_hatch_divine", true)
                     card:juice_up(0.3, 0.5)
                     return true
                 end
@@ -160,6 +161,7 @@ SMODS.Consumable {
                 func = function()
                     local evolution = G.jokers.highlighted[1]
                     evolution:set_ability("j_hatch_divine_loveletter") -- The Divine Joker
+                    evolution:set_edition("e_hatch_divine", true)
                     card:juice_up(0.3, 0.5)
                     return true
                 end
@@ -240,6 +242,7 @@ SMODS.Consumable {
                 func = function()
                     local evolution = G.jokers.highlighted[1]
                     evolution:set_ability("j_hatch_divine_wildside") -- The Divine Joker
+                    evolution:set_edition("e_hatch_divine", true)
                     card:juice_up(0.3, 0.5)
                     return true
                 end
@@ -320,6 +323,7 @@ SMODS.Consumable {
                 func = function()
                     local evolution = G.jokers.highlighted[1]
                     evolution:set_ability("j_hatch_divine_ball") -- The Divine Joker
+                    evolution:set_edition("e_hatch_divine", true)
                     card:juice_up(0.3, 0.5)
                     return true
                 end
@@ -400,6 +404,7 @@ SMODS.Consumable {
                 func = function()
                     local evolution = G.jokers.highlighted[1]
                     evolution:set_ability("j_hatch_divine_fourleaf") -- The Divine Joker
+                    evolution:set_edition("e_hatch_divine", true)
                     card:juice_up(0.3, 0.5)
                     return true
                 end
@@ -480,6 +485,7 @@ SMODS.Consumable {
                 func = function()
                     local evolution = G.jokers.highlighted[1]
                     evolution:set_ability("j_hatch_divine_banner") -- The Divine Joker
+                    evolution:set_edition("e_hatch_divine", true)
                     card:juice_up(0.3, 0.5)
                     return true
                 end
@@ -560,6 +566,7 @@ SMODS.Consumable {
                 func = function()
                     local evolution = G.jokers.highlighted[1]
                     evolution:set_ability("j_hatch_divine_mime") -- The Divine Joker
+                    evolution:set_edition("e_hatch_divine", true)
                     card:juice_up(0.3, 0.5)
                     return true
                 end
@@ -640,6 +647,7 @@ SMODS.Consumable {
                 func = function()
                     local evolution = G.jokers.highlighted[1]
                     evolution:set_ability("j_hatch_divine_fist") -- The Divine Joker
+                    evolution:set_edition("e_hatch_divine", true)
                     card:juice_up(0.3, 0.5)
                     return true
                 end
@@ -720,6 +728,7 @@ SMODS.Consumable {
                 func = function()
                     local evolution = G.jokers.highlighted[1]
                     evolution:set_ability("j_hatch_divine_space") -- The Divine Joker
+                    evolution:set_edition("e_hatch_divine", true)
                     card:juice_up(0.3, 0.5)
                     return true
                 end
@@ -800,6 +809,7 @@ SMODS.Consumable {
                 func = function()
                     local evolution = G.jokers.highlighted[1]
                     evolution:set_ability("j_hatch_divine_trousers") -- The Divine Joker
+                    evolution:set_edition("e_hatch_divine", true)
                     card:juice_up(0.3, 0.5)
                     return true
                 end
