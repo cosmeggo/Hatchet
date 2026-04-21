@@ -10,8 +10,8 @@ This mod may not be compatible with other pre-existing mods.
 ## Jokers
 - 30/30 Common Jokers
 - 30/30 Uncommon Jokers
-- 23/30 Rare Jokers
-- 6/30 Divine Jokers
+- 30/30 Rare Jokers
+- 10/30 Divine Jokers
 - 1 Legendary Joker
 ## Consumables
 - 10 Sephirot Cards
@@ -29,12 +29,10 @@ This mod may not be compatible with other pre-existing mods.
 
 
 # Planned Features
-- 15 more Uncommon Jokers
-- 15 more Rare Jokers
-- 25 more Divine Jokers
-- 1 more Boss Blind (maybe)
+- 10 more Divine Jokers
+- 1 more Boss Blind
+- Proper localisation
 
 # Known Bugs
-- Divine Jokers do not fully work. (Fixed in the upcoming v1.6.0)
 - Plant Party and Defaced do not work together.
-- Not all v1.7.0 Jokers are implemented yet, nor is their art.
+- Da'at may show up in Spectral Packs in odd occasions.
