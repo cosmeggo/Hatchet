@@ -2,11 +2,11 @@ This mod was initially developed in JokerForge, but development has been continu
 
 == Lead Developer / Artist ==
 
-Plasma
+cosmeggo
 
 == Art ==
 
-cassknows (divine shader)
+cassknows (Creator of the Divine shader)
 
 == Programming Help ==
 
@@ -16,7 +16,7 @@ ThunderEdge
 nh6574
 Eremel
 Eris
-Somethingcom515 (Seals On Every)-
+Somethingcom515 (Seals On Every)
 metanite64
 FreindlyBear
 srockw
@@ -25,7 +25,7 @@ kierkat10
 
 == Special Thanks ==
 
-aikoyori
+aikoyori - without them this mod wouldn't exist
 PokerthePoker
 Kaiwen
 nullstudios
