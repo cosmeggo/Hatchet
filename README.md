@@ -6,8 +6,6 @@ For a simplified Vanilla+ experience, try [Hatchet Lite](https://github.com/cosm
 # Dependencies
 - [Steamodded](https://github.com/Steamodded/smods) (Required)
 
-This mod may not be compatible with other pre-existing mods. 
-
 # Current Features
 ## Jokers
 - 30/30 Common Jokers
