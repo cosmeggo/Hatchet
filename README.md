@@ -1,6 +1,8 @@
 # Hatchet
 A content-based Balatro mod that adds new Jokers, consumables, and more!
 
+For a simplified Vanilla+ experience, try [Hatchet Lite](https://github.com/cosmeggo/Hatchet-Lite)
+
 # Dependencies
 - [Steamodded](https://github.com/Steamodded/smods) (Required)
 
@@ -35,4 +37,5 @@ This mod may not be compatible with other pre-existing mods.
 
 # Known Bugs
 - Plant Party and Defaced do not work together.
-- Da'at shows up in Spectral Packs sometimes. No idea why.
+- Da'at shows up in Spectral Packs sometimes. No idea why!!!
+- Fireworks has localisation errors
