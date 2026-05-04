@@ -1,5 +1,3 @@
-This mod was initially developed in JokerForge, but development has been continued in VSC.
-
 == Lead Developer / Artist ==
 
 cosmeggo
