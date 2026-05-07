@@ -1,3 +1,8 @@
+# IMPORTANT NOTICE!
+Hatchet is being currently being reworked in its entirety! As a result, some of the information presented may be inaccurate.
+To follow along with the rework progress, see the `experimental` branch.
+
+##
 # Hatchet
 A content-based Balatro mod that adds new Jokers, consumables, and more!
 
