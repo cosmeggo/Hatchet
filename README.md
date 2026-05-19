@@ -1,3 +1,5 @@
+# Currently in beta!
+
 # Hatchet
 A content-based Balatro mod that adds new Jokers, consumables, and more!
 
