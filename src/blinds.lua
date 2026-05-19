@@ -6,15 +6,7 @@ SMODS.Blind {
     pos = { x = 0, y = 0 },
     boss = { min = 2 },
     boss_colour = HEX("b6315e"),
-    atlas = 'CustomBlinds',
-
-    loc_txt = {
-        ['name'] = 'The Axe',
-        ['text'] = {
-            [1] = 'Destroy first played card',
-            [2] = 'after every played hand',
-        },
-    },
+    atlas = 'HatchetBlinds',
 
     calculate = function(self, blind, context)
     if not blind.disabled then
@@ -42,53 +34,33 @@ SMODS.Blind {
     pos = { x = 0, y = 1 },
     boss = { min = 4 },
     boss_colour = HEX("6caa70"),
-    atlas = 'CustomBlinds',
-
-    loc_txt = {
-        ['name'] = 'The Sack',
-        ['text'] = {
-            [1] = 'Downgrade scored',
-            [2] = 'cards by rank',
-        },
-    },
+    atlas = 'HatchetBlinds',
 
     calculate = function(self, blind, context)
         if not blind.disabled then
-            if context.individual and context.cardarea == G.play  then
+            if context.individual and context.cardarea == G.play then
+                if context.before then
                 assert(SMODS.modify_rank(context.other_card, -1))
                 return {
                     message = "Downgrade!"
                 }
             end
         end
+    end
 end
 }
-
--- The Whip (has been removed)
 
 -- The Cudgel
 SMODS.Blind({
 	key = "hatch_cudgel",
-	config = {
-		extra = {
-			hands_removed = 0,
-			hand_size = 1,
-		},
-	},
+	config = { extra = { hands_removed = 0, hand_size = 1, }, },
 	dollars = 5,
-	mult = 1,
+	mult = 2,
 	pos = { x = 0, y = 3 },
 	boss = { min = 3 },
 	boss_colour = HEX("a652c0"),
-	atlas = "CustomBlinds",
+	atlas = "HatchetBlinds",
 
-	loc_txt = {
-		["name"] = "The Cudgel",
-		["text"] = {
-			[1] = "Decrease hand size",
-			[2] = "per played hand",
-		},
-	},
 -- Credit to ThunderEdge for this code: I had no idea what I was doing but he helped me a ton! - Plasma
 	loc_vars = function(self)
 		return { vars = { self.config.extra.hands_removed } }
@@ -126,25 +98,13 @@ SMODS.Blind({
 -- The Claw
 SMODS.Blind {
     key = "hatch_claw",
-    config = {
-        extra = {
-            play_size = 5
-        }
-    },
+    config = { extra = { play_size = 5 } },
     dollars = 5,
     mult = 2,
     pos = { x = 0, y = 4 },
-    boss = { min = 4 },
+    boss = { min = 6 },
     boss_colour = HEX("6899ff"),
-    atlas = 'CustomBlinds',
-
-    loc_txt = {
-        ['name'] = 'The Claw',
-        ['text'] = {
-            [1] = 'Decrease play',
-            [2] = 'size per discard',
-        },
-    },
+    atlas = 'HatchetBlinds',
 
     calculate = function(self, blind, context)
         if not blind.disabled then

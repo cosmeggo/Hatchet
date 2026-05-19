@@ -1,64 +1,86 @@
--- Rose Stake
+-- Infernal Stake
 SMODS.Stake {
-    name = "Rose Stake",
-    key = "rose",
+    name = "Infernal Stake",
+    key = "infernal",
     prefix_config = {  applied_stakes = { mod = false } },
     applied_stakes = { "gold" },
     pos = { x = 0, y = 0 },
     sticker_pos = { x = 1, y = 0 },
-    loc_txt = {
-    name = "Rose Stake",
-        text = {
-            "Shop can have {C:attention}Burdened{} Jokers",
-            "{C:inactive,s:0.8}(Take up an extra slot)",
-            "{s:0.8}Applies all previous Stakes",
-        },
-    sticker = {
-    name = "Rose Sticker",
-    text = {
-        "Used this Joker",
-        "to win on {C:attention}Rose",
-        "{C:attention}Stake{} difficulty",
-        },
-    }
-},
-    atlas = 'CustomStakes',
-    sticker_atlas = 'CustomStickers',
+    atlas = 'HatchetStakes',
+    sticker_atlas = 'HatchetStickers',
     shiny = true,
+    modifiers = function()
+        G.GAME.starting_params.hand_size = G.GAME.starting_params.hand_size - 1
+    end,    
+    colour = HEX("e48571")
+}
+
+-- Tempest Stake
+SMODS.Stake {
+    name = "Tempest Stake",
+    key = "tempest",
+    prefix_config = {  applied_stakes = { mod = false } },
+    applied_stakes = { "hatch_infernal" },
+    pos = { x = 1, y = 0 },
+    sticker_pos = { x = 2, y = 0 },
+    atlas = 'HatchetStakes',
+    shiny = true,
+    sticker_atlas = 'HatchetStickers',
+	modifiers = function()
+		G.GAME.win_ante = 10 -- credit to the cryptid mod
+	end,
+    colour = HEX("d9bf9a")
+}
+
+-- Abyssal Stake
+SMODS.Stake {
+    name = "Abyssal Stake",
+    key = "abyssal",
+    prefix_config = {  applied_stakes = { mod = false } },
+    applied_stakes = { "hatch_tempest" },
+    pos = { x = 2, y = 0 },
+    sticker_pos = { x = 3, y = 0 },
+    atlas = 'HatchetStakes',
+    shiny = true,
+    sticker_atlas = 'HatchetStickers',
+    modifiers = function()
+        G.GAME.modifiers.no_blind_reward = G.GAME.modifiers.no_blind_reward or {}
+        G.GAME.modifiers.no_blind_reward.Small = true
+        G.GAME.modifiers.no_blind_reward.Big = true
+    end,
+    colour = HEX("4c96d5")
+}
+
+-- Vernal Stake
+SMODS.Stake {
+    name = "VernaL Stake",
+    key = "vernal",
+    prefix_config = {  applied_stakes = { mod = false } },
+    applied_stakes = { "hatch_abyssal" },
+    pos = { x = 3, y = 0 },
+    sticker_pos = { x = 4, y = 0 },
+    atlas = 'HatchetStakes',
+    shiny = true,
+    sticker_atlas = 'HatchetStickers',
     modifiers = function()
         G.GAME.modifiers.enable_hatch_burdened = true
     end,
-    colour = G.C.RED,
+    colour = HEX("6cbda6")
 }
 
--- Diamond Stake
+-- Ethereal Stake
 SMODS.Stake {
-    name = "Crystal Stake",
-    key = "crystal",
+    name = "Ethereal Stake",
+    key = "ethereal",
     prefix_config = {  applied_stakes = { mod = false } },
-    applied_stakes = { "hatch_rose" },
+    applied_stakes = { "hatch_verdant" },
     pos = { x = 0, y = 1 },
-    sticker_pos = { x = 2, y = 0 },
-    loc_txt = {
-    name = "Crystal Stake",
-        text = {
-            "{C:red}-1{} Hand Size",
-            "{s:0.8}Applies all previous Stakes",
-        },
-    sticker = {
-    name = "Crystal Sticker",
-    text = {
-            "Used this Joker",
-            "to win on {C:attention}Crystal",
-            "{C:attention}Stake{} difficulty",
-        },
-    }
-},
-    atlas = 'CustomStakes',
+    sticker_pos = { x = 0, y = 1 },
+    atlas = 'HatchetStakes',
     shiny = true,
-    sticker_atlas = 'CustomStickers',
+    sticker_atlas = 'HatchetStickers',
     modifiers = function()
-        G.GAME.starting_params.hand_size = G.GAME.starting_params.hand_size - 1
+        G.GAME.modifiers.scaling = (G.GAME.modifiers.scaling or 2) + 2
     end,
-    colour = G.C.BLUE,
+    colour = HEX("604f76")
 }

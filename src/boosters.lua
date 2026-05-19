@@ -2,14 +2,8 @@
 SMODS.Booster {
     key = "sephirot_mega_1",
     weight = 0.07,
-    atlas = "CustomBoosters",
+    atlas = "HatchetBoosters",
     loc_txt = {
-        name = "Sephirot Pack",
-        text = {
-            [1] = 'Choose {C:attention}2{} of up to',
-            [2] = '{C:attention}5{} {C:green}Sephirot{} cards to',
-            [3] = 'be used immediately'
-        },
         group_name = "Sephirot Pack"
     },
     cost = 5,
@@ -53,7 +47,7 @@ SMODS.Booster {
             }
         else
             _card = {
-                set = "sephirot",
+                set = "hatch_sephirot",
                 area = G.pack_cards,
                 skip_materialize = true,
                 soulable = true,
@@ -64,18 +58,12 @@ SMODS.Booster {
 end
 }
 
--- Jumbo Sephirot Pack    
+-- Jumbo Sephirot Pack
 SMODS.Booster {
     key = "sephirot_jumbo_1",
     weight = 0.3,
-    atlas = "CustomBoosters",
+    atlas = "HatchetBoosters",
     loc_txt = {
-        name = "Sephirot Pack",
-        text = {
-            [1] = 'Choose {C:attention}1{} of up to',
-            [2] = '{C:attention}5{} {C:green}Sephirot{} cards to',
-            [3] = 'be used immediately'
-        },
         group_name = "Sephirot Pack"
     },
     cost = 5,
@@ -119,7 +107,7 @@ SMODS.Booster {
             }
         else
             _card = {
-                set = "sephirot",
+                set = "hatch_sephirot",
                 area = G.pack_cards,
                 skip_materialize = true,
                 soulable = true,
@@ -131,18 +119,11 @@ end
 }
 
 -- Sephirot Packs (Normal)
-
 SMODS.Booster {
     key = "sephirot_normal_1",
     weight = 0.3,
-    atlas = "CustomBoosters",
+    atlas = "HatchetBoosters",
     loc_txt = {
-        name = "Sephirot Pack",
-        text = {
-            [1] = 'Choose {C:attention}1{} of up to',
-            [2] = '{C:attention}3{} {C:green}Sephirot{} cards to',
-            [3] = 'be used immediately'
-        },
         group_name = "Sephirot Pack"
     },
     cost = 5,
@@ -186,7 +167,7 @@ SMODS.Booster {
             }
         else
             _card = {
-                set = "sephirot",
+                set = "hatch_sephirot",
                 area = G.pack_cards,
                 skip_materialize = true,
                 soulable = true,
@@ -200,14 +181,8 @@ end
 SMODS.Booster {
     key = "sephirot_normal_2",
     weight = 0.3,
-    atlas = "CustomBoosters",
+    atlas = "HatchetBoosters",
     loc_txt = {
-        name = "Sephirot Pack",
-        text = {
-            [1] = 'Choose {C:attention}1{} of up to',
-            [2] = '{C:attention}3{} {C:green}Sephirot{} cards to',
-            [3] = 'be used immediately'
-        },
         group_name = "Sephirot Pack"
     },
     cost = 5,
@@ -251,7 +226,7 @@ SMODS.Booster {
             }
         else
             _card = {
-                set = "sephirot",
+                set = "hatch_sephirot",
                 area = G.pack_cards,
                 skip_materialize = true,
                 soulable = true,
@@ -262,18 +237,12 @@ SMODS.Booster {
 end
 }
 
--- Divine Pack
+-- Sephirot Packs (Normal)
 SMODS.Booster {
     key = "divine_pack",
-    weight = 0.07,
-    atlas = "CustomBoosters",
+    weight = 0.1,
+    atlas = "HatchetBoosters",
     loc_txt = {
-        name = "Divine Pack",
-        text = {
-            [1] = 'Choose {C:attention}1{} of up to',
-            [2] = '{C:attention}3{} {C:dark_edition}Divine{} cards to',
-            [3] = 'be used immediately'
-        },
         group_name = "Divine Pack"
     },
     cost = 5,
@@ -305,15 +274,14 @@ SMODS.Booster {
         G.booster_pack_sparkles.fade_alpha = 1
         G.booster_pack_sparkles:fade(1, 0)
     end,
-    select_card = "consumeables",
     create_card = function(self, card, i)
         local _card
             _card = {
-                set = "divine",
+                set = "hatch_divine",
                 area = G.pack_cards,
                 skip_materialize = true,
                 soulable = true,
-                key_append = "hatch_divine_pack",
+                key_append = "hatch_divine_pack"
         }
     return _card
 end

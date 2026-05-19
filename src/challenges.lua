@@ -5,12 +5,6 @@ SMODS.Challenge {
         { id = 'j_hatch_hatchet', eternal = true },
         { id = 'j_certificate',   eternal = true },
     },
-    loc_txt = {
-        ['name'] = 'Massacre',
-        ['unlock'] = {
-            [1] = 'Unlocked by default.'
-        }
-    },
     restrictions = {
         banned_cards = {
             { id = 'p_standard_normal_1', ids = {
@@ -42,12 +36,6 @@ SMODS.Challenge {
         { id = 'j_oops',             eternal = true, edition = 'negative' },
         { id = 'j_hatch_topsyturvy', eternal = true },
     },
-    loc_txt = {
-        ['name'] = 'Upside Down',
-        ['unlock'] = {
-            [1] = 'Unlocked by default.'
-        }
-    },
 }
 
 -- Pillow Fight
@@ -55,12 +43,6 @@ SMODS.Challenge {
     key = 'pillowfight',
     jokers = {
         { id = 'j_hatch_dakimakura', eternal = true },
-    },
-    loc_txt = {
-        ['name'] = 'Pillow Fight',
-        ['unlock'] = {
-            [1] = 'Unlocked by default.'
-        }
     },
     deck = {
         type = 'Challenge Deck',
@@ -171,12 +153,6 @@ SMODS.Challenge {
         { id = 'j_hatch_slipperyslope', eternal = true },
         { id = 'j_hatch_handsdown',     eternal = true },
     },
-    loc_txt = {
-        ['name'] = 'Stock Market',
-        ['unlock'] = {
-            [1] = 'Unlocked by default.'
-        }
-    },
 }
 
 -- Sky High
@@ -185,10 +161,38 @@ SMODS.Challenge {
     jokers = {
         { id = 'j_hatch_paperplane', eternal = true },
     },
-    loc_txt = {
-        ['name'] = 'Paper Plane',
-        ['unlock'] = {
-            [1] = 'Unlocked by default.'
+}
+
+-- Blind Spot
+SMODS.Challenge {
+    key = 'blindspot',
+    jokers = {
+        { id = 'j_hatch_snakeeyes', eternal = true, edition = 'negative' },
+        { id = 'j_oops', eternal = true, edition = 'negative' },
+        { id = 'j_hatch_wheelbarrow', eternal = true, edition = 'negative' },
+        { id = 'j_joker' },
+        { id = 'j_joker' },
+    },
+    restrictions = {
+        banned_other = {
+            { id = 'bl_club', type = 'blind' },
+            { id = 'bl_goad', type = 'blind' },
+            { id = 'bl_window', type = 'blind' },
+            { id = 'bl_plant', type = 'blind' },
+            { id = 'bl_pillar', type = 'blind' },
+            { id = 'bl_head', type = 'blind' },
+            { id = 'bl_final_leaf', type = 'blind' },
         }
+    },
+}
+
+-- Testing Deck
+SMODS.Challenge {
+    key = 'testingdeck',
+    jokers = {
+        { id = 'j_oops',             eternal = true, edition = 'negative' },
+        { id = 'j_oops',             eternal = true, edition = 'negative' },
+        { id = 'j_oops',             eternal = true, edition = 'negative' },
+        { id = 'j_oops',             eternal = true, edition = 'negative' },
     },
 }
