@@ -1,5 +1,3 @@
-This mod was initially developed in JokerForge, but development has been continued in VSC.
-
 == Lead Developer / Artist ==
 
 cosmeggo
@@ -27,6 +25,10 @@ kierkat10
 
 aikoyori - without them this mod wouldn't exist
 PokerthePoker
+SLDTyp0
+RadiationV2 (helped make Black Swan)
+M0Xes (helped make Black Swan)
+Lizzie (helped make Black Swan)
 Kaiwen
 nullstudios
 Astro
