@@ -114,7 +114,7 @@ SMODS.ConsumableType {
     default = 'c_hatch_kether',
     primary_colour = HEX('0ebab2'),
     secondary_colour = HEX('0ebab2'),
-    collection_rows = { 5, 6 },
+    collection_rows = { 5, 5 },
     shop_rate = 0,
     loc_txt = {
         name = "Sephirot",
@@ -127,7 +127,7 @@ SMODS.ConsumableType {
     default = 'c_hatch_daat',
     primary_colour = HEX('484cdb'),
     secondary_colour = HEX('484cdb'),
-    collection_rows = { 5, 6 },
+    collection_rows = { 5, 5 },
     shop_rate = 0,
     loc_txt = {
         name = "Divine",

@@ -1,13 +1,11 @@
 {
   "id": "hatchet",
   "name": "Hatchet",
-  "author": [
-    "Plasma"
-  ],
+  "author": [ "Cosmeggo" ],
   "description": "A Balatro mod that adds new Jokers, consumables, and much more!",
   "prefix": "hatch",
   "main_file": "main.lua",
-  "version": "2.0.0~BETA~2",
+  "version": "2.0.0~BETA~3",
   "priority": 0,
   "badge_colour": "333d4f",
   "badge_text_colour": "d6cff3",
