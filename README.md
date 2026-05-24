@@ -1,20 +1,17 @@
 # Hatchet
-A content-based Balatro mod that adds new Jokers, consumables, and more!
+A content-based Balatro mod!
 
-# Dependencies
-- [Steamodded](https://github.com/Steamodded/smods) (Required)
+![image](https://raw.githubusercontent.com/cosmeggo/EndlessFlow-Art/refs/heads/main/hatchetscreens/screenie1.png)
+![image](https://raw.githubusercontent.com/cosmeggo/EndlessFlow-Art/refs/heads/main/hatchetscreens/screenie2.png)
+![image](https://raw.githubusercontent.com/cosmeggo/EndlessFlow-Art/refs/heads/main/hatchetscreens/screenie3.png)
 
-This mod may not be compatible with other pre-existing mods. 
+This mod requires [Steamodded](https://github.com/Steamodded/smods/releases/latest).
 
 # Current Features
-- 100+ Common Jokers
-- 40 Consumables
-- 3 Enhancements
+- 100+ Jokers
+- 20+ Consumables
 - 4 Decks
 - 4 Boss Blinds
-- 3 Challenges
-- and more!
+...and more!
 
-# Known Bugs
-- Burdened Stickers appear on Negative edition Jokers
-- Wheelbarrow doesn't fully work
+## [Discord Server](https://discord.gg/hGwkjwUV9V)
