@@ -12,9 +12,7 @@ SMODS.Booster {
     draw_hand = true,
     loc_vars = function(self, info_queue, card)
         local cfg = (card and card.ability) or self.config
-        return {
-            vars = { cfg.choose, cfg.extra },
-        }
+        return {vars = { { colours = { HEX('484cdb') } }, cfg.choose, cfg.extra },}
     end,
     ease_background_colour = function(self)
         ease_colour(G.C.DYN_UI.MAIN, HEX("298197"))

@@ -351,7 +351,7 @@ SMODS.Joker {
 -- Musketeer
 SMODS.Joker {
     key = "musketeer",
-    config = { extra = { dollars = 9, type = 'Three of a Kind' } },
+    config = { extra = { dollars = 4, type = 'Three of a Kind' } },
     pos = { x = 0, y = 1 },
     cost = 5,
     rarity = 1,
@@ -462,7 +462,7 @@ SMODS.Joker {
                 func = (function()
                     SMODS.add_card {
                         set = 'Spectral',
-                        key_append = 'j_hatch_sewingneedle'
+                        key_append = 'hatch_sewingneedle'
                     }
                     G.GAME.consumeable_buffer = 0
                     return true
@@ -1355,12 +1355,12 @@ SMODS.Joker {
                 xmult = card.ability.extra.xmult
             }
         end
-            if context.after then
-                for k, v in pairs(G.play.cards) do
-                    v.hatchet_was_flipped = nil
-                end
+        if context.after then
+            for k, v in pairs(G.play.cards) do
+                v.hatchet_was_flipped = nil
             end
         end
+    end
 }
 
 -- Love Letter
@@ -3309,18 +3309,1267 @@ SMODS.Joker({
     end
 })
 
+-- Divine Mime
+SMODS.Joker {
+    key = "divine_mime",
+    config = { extra = { repetitions = 2, energy = 5 } },
+    pos = { x = 6, y = 10 },
+    soul_pos = { x = 7, y = 10 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xchips, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context) -- Joker Effect
+        if context.repetition and context.cardarea == G.hand and (next(context.card_effects[1]) or #context.card_effects > 1) then
+            return {
+                repetitions = card.ability.extra.repetitions
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_mime") -- The Original Joker
+                        card:set_edition()         -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Banner
+SMODS.Joker {
+    key = "divine_banner",
+    config = { extra = { xchips = 1.5, energy = 5 } },
+    pos = { x = 4, y = 10 },
+    soul_pos = { x = 5, y = 10 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xchips, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context) -- Joker Effect
+        if context.joker_main then
+            return {
+                xchips = G.GAME.current_round.discards_left * card.ability.extra.xchips
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_banner") -- The Original Joker
+                        card:set_edition()           -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Summit
+SMODS.Joker {
+    key = "divine_summit",
+    config = { extra = { xmult = 1.5, d_remaining = 0, energy = 5 } },
+    pos = { x = 2, y = 12 },
+    soul_pos = { x = 3, y = 12 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xmult, card.ability.extra.d_remaining, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.joker_main and G.GAME.current_round.discards_left == card.ability.extra.d_remaining then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_mystic_summit") -- The Original Joker
+                        card:set_edition()                  -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine 8-Ball
+SMODS.Joker {
+    key = "divine_8_ball",
+    config = { extra = { energy = 5 } },
+    pos = { x = 4, y = 12 },
+    soul_pos = { x = 5, y = 12 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play then
+            if context.other_card:get_id() == 8 then
+                if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                    G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                    G.E_MANAGER:add_event(Event({
+                        func = (function()
+                            SMODS.add_card {
+                                set = 'Spectral',
+                            }
+                            G.GAME.consumeable_buffer = 0
+                            return true
+                        end)
+                    }))
+                    return {
+                        message = localize('k_plus_spectral'),
+                        colour = G.C.SECONDARY_SET.Spectral,
+                    }
+                end
+            end
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_8_ball") -- The Original Joker
+                        card:set_edition()           -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Fist
+SMODS.Joker {
+    key = "divine_fist",
+    config = { extra = { energy = 5 } },
+    pos = { x = 8, y = 10 },
+    soul_pos = { x = 9, y = 10 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.hand and not context.end_of_round then
+            local temp_Mult, temp_ID = 15, 15
+            local raised_card = nil
+            for i = 1, #G.hand.cards do
+                if temp_ID >= G.hand.cards[i].base.id and not SMODS.has_no_rank(G.hand.cards[i]) then
+                    temp_Mult = G.hand.cards[i].base.nominal
+                    temp_ID = G.hand.cards[i].base.id
+                    raised_card = G.hand.cards[i]
+                end
+            end
+            if raised_card == context.other_card then
+                if context.other_card.debuff then
+                    return {
+                        message = localize('k_debuffed'),
+                        colour = G.C.RED
+                    }
+                else
+                    return {
+                        xmult = 2 * temp_Mult
+                    }
+                end
+            end
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_raised_fist") -- The Original Joker
+                        card:set_edition()                -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+
+}
+
+-- Divine Fibonacci
+SMODS.Joker {
+    key = "divine_fibonacci",
+    config = { extra = { xmult = 1.5, energy = 5 } },
+    pos = { x = 8, y = 12 },
+    soul_pos = { x = 9, y = 12 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xmult, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play then
+            local id = context.other_card:get_id()
+            if id == 2 or id == 3 or id == 5 or id == 8 or id == 14 then
+                return {
+                    xmult = card.ability.extra.xmult
+                }
+            end
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_fibonacci") -- The Original Joker
+                        card:set_edition()              -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Scholar
+SMODS.Joker {
+    key = "divine_scholar",
+    config = { extra = { chips = 200, xmult = 4, odds = 2, energy = 5 } },
+    pos = { x = 6, y = 12 },
+    soul_pos = { x = 7, y = 12 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds,
+            'j_hatch_divine_scholar')
+        return { vars = { numerator, denominator, card.ability.extra.chips, card.ability.extra.xmult, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 14
+            and SMODS.pseudorandom_probability(card, 'j_hatch_divine_scholar', 1, card.ability.extra.odds) then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        else
+            if context.individual and context.cardarea == G.play and context.other_card:get_id() == 14 then
+                return {
+                    chips = card.ability.extra.chips
+                }
+            end
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_scholar") -- The Original Joker
+                        card:set_edition()            -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Space Joker
+SMODS.Joker {
+    key = "divine_space",
+    config = { extra = { energy = 5 } },
+    pos = { x = 0, y = 11 },
+    soul_pos = { x = 1, y = 11 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.before then
+            return {
+                level_up = true,
+                message = localize('k_level_up_ex')
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_space") -- The Original Joker
+                        card:set_edition()          -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Hiker
+SMODS.Joker {
+    key = "divine_hiker",
+    config = { extra = { xchips = 0.5, energy = 5 } },
+    pos = { x = 0, y = 13 },
+    soul_pos = { x = 1, y = 13 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xchips, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play then
+            context.other_card.ability.perma_x_chips = (context.other_card.ability.perma_x_chips or 0) +
+                card.ability.extra.xchips
+            return {
+                message = localize('k_upgrade_ex'),
+                colour = G.C.CHIPS
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_hiker") -- The Original Joker
+                        card:set_edition()          -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Riffraff
+SMODS.Joker {
+    key = "divine_riffraff",
+    config = { extra = { creates = 2, energy = 5 } },
+    pos = { x = 2, y = 13 },
+    soul_pos = { x = 3, y = 13 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.creates, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.setting_blind and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+            local jokers_to_create = math.min(card.ability.extra.creates,
+                G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
+            G.GAME.joker_buffer = G.GAME.joker_buffer + jokers_to_create
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    for _ = 1, jokers_to_create do
+                        SMODS.add_card {
+                            set = 'Joker',
+                            rarity = 'Rare',
+                            key_append = 'hatch_riffraff'
+                        }
+                        G.GAME.joker_buffer = 0
+                    end
+                    return true
+                end
+            }))
+            return {
+                message = localize('k_plus_joker'),
+                colour = G.C.RED,
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_riff_raff") -- The Original Joker
+                        card:set_edition()              -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Rebate
+SMODS.Joker {
+    key = "divine_mail",
+    config = { extra = { dollars = 5, energy = 5 } },
+    pos = { x = 8, y = 14 },
+    soul_pos = { x = 9, y = 14 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.dollars, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.discard and not context.blueprint then
+            return {
+                dollars = card.ability.extra.dollars,
+                func = function() -- This is for timing purposes, it runs after the dollar manipulation
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.GAME.dollar_buffer = 0
+                            return true
+                        end
+                    }))
+                end
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_mail") -- The Original Joker
+                        card:set_edition()         -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Vagabond
+SMODS.Joker {
+    key = "divine_vagabond",
+    config = { extra = { dollars = 4, energy = 5 } },
+    pos = { x = 4, y = 13 },
+    soul_pos = { x = 5, y = 13 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.dollars, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.joker_main and
+            #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            if G.GAME.dollars <= card.ability.extra.dollars then -- See note about Talisman compatibility on the wiki
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                G.E_MANAGER:add_event(Event({
+                    func = (function()
+                        SMODS.add_card {
+                            set = 'hatch_divine',
+                            key_append = 'vremade_vagabond' -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
+                        }
+                        G.GAME.consumeable_buffer = 0
+                        return true
+                    end)
+                }))
+            end
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_vagabond") -- The Original Joker
+                        card:set_edition()             -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Baseball
+SMODS.Joker {
+    key = "divine_baseball",
+    config = { extra = { xmult = 1.5, energy = 5 } },
+    pos = { x = 6, y = 13 },
+    soul_pos = { x = 7, y = 13 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xmult, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.other_joker then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_baseball") -- The Original Joker
+                        card:set_edition()             -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Walkie Talkie
+SMODS.Joker {
+    key = "divine_walkie_talkie",
+    config = { extra = { chips = 100, mult = 44, energy = 5 } },
+    pos = { x = 4, y = 14 },
+    soul_pos = { x = 5, y = 14 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and
+            (context.other_card:get_id() == 10 or context.other_card:get_id() == 4) then
+            return {
+                chips = card.ability.extra.chips,
+                mult = card.ability.extra.mult
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_walkie_talkie") -- The Original Joker
+                        card:set_edition()                  -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Trousers
+SMODS.Joker {
+    key = "divine_trousers",
+    config = { extra = { xmult = 1, xmult_mod = 0.5, dollars = 4, energy = 5 } },
+    pos = { x = 2, y = 10 },
+    soul_pos = { x = 3, y = 10 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xmult, card.ability.extra.xmult_mod, card.ability.extra.dollars, card.ability.extra.energy, localize('Two Pair', 'poker_hands') } }
+    end,
+
+    calculate = function(self, card, context) -- Joker Effect
+        if context.before and not context.blueprint and (next(context.poker_hands['Two Pair']) or next(context.poker_hands['Full House'])) then
+            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_mod
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.dollars
+            return {
+                dollars = card.ability.extra.dollars,
+                message = localize('k_upgrade_ex'),
+                colour = G.C.RED
+            }
+        end
+        func = function() -- For timing purposes, it runs after the dollar manipulation
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.GAME.dollar_buffer = 0
+                    return true
+                end
+            }))
+        end
+        if context.joker_main then -- Joker Effect
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_trousers") -- The Original Joker
+                        card:set_edition()             -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Ticket
+SMODS.Joker {
+    key = "divine_ticket",
+    config = { extra = { dollars = 8, energy = 5 } },
+    pos = { x = 8, y = 13 },
+    soul_pos = { x = 9, y = 13 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.dollars, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play
+            and next(SMODS.get_enhancements(context.other_card)) then
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.dollars
+            return {
+                dollars = card.ability.extra.dollars,
+                func = function() -- This is for timing purposes, it runs after the dollar manipulation
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.GAME.dollar_buffer = 0
+                            return true
+                        end
+                    }))
+                end
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_ticket") -- The Original Joker
+                        card:set_edition()           -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Swashbuckler
+SMODS.Joker {
+    key = "divine_buckler",
+    config = { extra = { xmult = 1, xmult_mod = 0.2, energy = 5 } },
+    pos = { x = 6, y = 14 },
+    soul_pos = { x = 7, y = 14 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        local sell_cost = 0
+        for _, joker in ipairs(G.jokers and G.jokers.cards or {}) do
+            if joker ~= card then
+                sell_cost = sell_cost + joker.sell_cost
+            end
+        end
+        return { vars = { card.ability.extra.xmult, card.ability.extra.xmult + (card.ability.extra.xmult_mod * sell_cost), card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local sell_cost = 0
+            for _, joker in ipairs(G.jokers.cards) do
+                if joker ~= card then
+                    sell_cost = sell_cost + joker.sell_cost
+                end
+            end
+            return {
+                xmult = card.ability.extra.xmult + (card.ability.extra.xmult_mod * sell_cost)
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_swashbuckler") -- The Original Joker
+                        card:set_edition()                 -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Smeared Hook
+local divine_smeared_check_ref = SMODS.smeared_check
+function SMODS.smeared_check(card, suit, ...)
+    if next(SMODS.find_card("j_hatch_divine_smeared")) then
+        if ((card.base.suit == 'Spades' or card.base.suit == 'Clubs' or card.base.suit == 'Hearts' or
+                card.base.suit == 'Diamonds') and (card.base.suit == 'Spades' or card.base.suit == 'Clubs' or
+                card.base.suit == 'Hearts' or card.base.suit == 'Diamonds')) then
+            return true
+        end
+    end
+    return divine_smeared_check_ref(card, suit, ...)
+end
+
+-- Divine Smeared Joker
+SMODS.Joker {
+    key = "divine_smeared",
+    config = { extra = { energy = 5 } },
+    pos = { x = 2, y = 14 },
+    soul_pos = { x = 3, y = 14 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = false,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_smeared") -- The Original Joker
+                        card:set_edition()            -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Stuntman
+SMODS.Joker {
+    key = "divine_stuntman",
+    config = { extra = { h_size = 2, xchips = 3, energy = 5 } },
+    pos = { x = 0, y = 14 },
+    soul_pos = { x = 1, y = 14 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xchips, card.ability.extra.h_size, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                xchips = card.ability.extra.xchips
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_stuntman") -- The Original Joker
+                        card:set_edition()             -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end,
+
+    add_to_deck = function(self, card, from_debuff)
+        G.hand:change_size(-card.ability.extra.h_size)
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        G.hand:change_size(card.ability.extra.h_size)
+    end,
+}
+
+-- Divine License
+SMODS.Joker {
+    key = "divine_license",
+    config = { extra = { xmult = 1, xmult_mod = 0.4, energy = 5 } },
+    pos = { x = 0, y = 15 },
+    soul_pos = { x = 1, y = 15 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        local driver_tally = 0
+        for _, playing_card in pairs(G.playing_cards or {}) do
+            if next(SMODS.get_enhancements(playing_card)) then driver_tally = driver_tally + 1 end
+        end
+        return { vars = { card.ability.extra.xmult_mod, card.ability.extra.xmult + (card.ability.extra.xmult_mod * driver_tally), card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local driver_tally = 0
+            for _, playing_card in pairs(G.playing_cards or {}) do
+                if next(SMODS.get_enhancements(playing_card)) then driver_tally = driver_tally + 1 end
+            end
+            return {
+                xmult = card.ability.extra.xmult + (card.ability.extra.xmult_mod * driver_tally)
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_drivers_license") -- The Original Joker
+                        card:set_edition()                    -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end,
+}
+
 -- Divine Hatchet
 SMODS.Joker({
     key = "divine_hatchet",
     config = { extra = { xmult = 4, energy = 5, } },
     pos = { x = 2, y = 9 },
     soul_pos = { x = 3, y = 9 },
-    cost = 9,
+    cost = 11,
     rarity = "hatch_evolved",
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
-    unlocked = false,
+    unlocked = true,
     discovered = false,
     atlas = 'HatchetJokers',
 
@@ -3370,18 +4619,19 @@ SMODS.Joker({
         end
     end
 })
+
 -- Divine Love Letter
 SMODS.Joker {
     key = "divine_loveletter",
     config = { extra = { xmult = 1.5, energy = 5, } },
     pos = { x = 4, y = 9 },
     soul_pos = { x = 5, y = 9 },
-    cost = 9,
+    cost = 11,
     rarity = "hatch_evolved",
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
-    unlocked = false,
+    unlocked = true,
     discovered = false,
     atlas = 'HatchetJokers',
 
@@ -3452,12 +4702,12 @@ SMODS.Joker {
     config = { extra = { repetitions = 1, xmult = 1.5, energy = 5 } },
     pos = { x = 6, y = 9 },
     soul_pos = { x = 7, y = 9 },
-    cost = 9,
+    cost = 11,
     rarity = "hatch_evolved",
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
-    unlocked = false,
+    unlocked = true,
     discovered = false,
     atlas = 'HatchetJokers',
 
@@ -3521,12 +4771,12 @@ SMODS.Joker {
     config = { extra = { energy = 5 } },
     pos = { x = 8, y = 9 },
     soul_pos = { x = 9, y = 9 },
-    cost = 9,
+    cost = 11,
     rarity = "hatch_evolved",
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
-    unlocked = false,
+    unlocked = true,
     discovered = false,
     atlas = 'HatchetJokers',
 
@@ -3571,15 +4821,15 @@ SMODS.Joker {
 -- Divine Steel Ball
 SMODS.Joker {
     key = "divine_ball",
-    config = { extra = { xmult = 1, xmult_mod = 1, energy = 5 } },
+    config = { extra = { xmult = 1, xmult_mod = 0.5, energy = 5 } },
     pos = { x = 0, y = 10 },
     soul_pos = { x = 1, y = 10 },
-    cost = 9,
+    cost = 11,
     rarity = "hatch_evolved",
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
-    unlocked = false,
+    unlocked = true,
     discovered = false,
     atlas = 'HatchetJokers',
 
@@ -3627,284 +4877,311 @@ SMODS.Joker {
     end
 }
 
--- Divine Banner
+-- Divine Musketeer
 SMODS.Joker {
-    key = "divine_banner",
-    config = { extra = { xchips = 1.5, energy = 5 } },
-    pos = { x = 4, y = 10 },
-    soul_pos = { x = 5, y = 10 },
-    cost = 9,
+    key = "divine_musketeer",
+    config = { extra = { type = 'Four of a Kind', energy = 5 } },
+    pos = { x = 2, y = 11 },
+    soul_pos = { x = 3, y = 11 },
+    cost = 11,
     rarity = "hatch_evolved",
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
-    unlocked = false,
+    unlocked = true,
     discovered = false,
     atlas = 'HatchetJokers',
 
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.xchips, card.ability.extra.energy } }
-    end,
-
-    calculate = function(self, card, context) -- Joker Effect
-        if context.joker_main then
-            return {
-                xchips = G.GAME.current_round.discards_left * card.ability.extra.xchips
-            }
-        end
-
-        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
-            if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
-                    trigger = 'after',
-                    delay = 0.4,
-                    func = function()
-                        local evolution = card
-                        play_sound('timpani')
-                        card:set_ability("j_banner") -- The Original Joker
-                        card:set_edition()           -- No edition
-                        card:juice_up(0.3, 0.5)
-                        return true
-                    end
-                }))
-                return { -- Devolve Message
-                    message = "Reverted!",
-                    colour = G.C.BLUE
-                }
-            else -- Losing Energy...
-                card.ability.extra.energy = card.ability.extra.energy - 1
-                return {
-                    message = "Losing energy...",
-                    colour = G.C.BLUE
-                }
-            end
-        end
-    end
-}
-
--- Divine Mime
-SMODS.Joker {
-    key = "divine_mime",
-    config = { extra = { repetitions = 2, energy = 5 } },
-    pos = { x = 6, y = 10 },
-    soul_pos = { x = 7, y = 10 },
-    cost = 9,
-    rarity = "hatch_evolved",
-    blueprint_compat = true,
-    eternal_compat = false,
-    perishable_compat = false,
-    unlocked = false,
-    discovered = false,
-    atlas = 'HatchetJokers',
-
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.xchips, card.ability.extra.energy } }
-    end,
-
-    calculate = function(self, card, context) -- Joker Effect
-        if context.repetition and context.cardarea == G.hand and (next(context.card_effects[1]) or #context.card_effects > 1) then
-            return {
-                repetitions = card.ability.extra.repetitions
-            }
-        end
-
-        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
-            if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
-                    trigger = 'after',
-                    delay = 0.4,
-                    func = function()
-                        local evolution = card
-                        play_sound('timpani')
-                        card:set_ability("j_mime") -- The Original Joker
-                        card:set_edition()         -- No edition
-                        card:juice_up(0.3, 0.5)
-                        return true
-                    end
-                }))
-                return { -- Devolve Message
-                    message = "Reverted!",
-                    colour = G.C.BLUE
-                }
-            else -- Losing Energy...
-                card.ability.extra.energy = card.ability.extra.energy - 1
-                return {
-                    message = "Losing energy...",
-                    colour = G.C.BLUE
-                }
-            end
-        end
-    end
-}
-
--- Divine Fist
-SMODS.Joker {
-    key = "divine_fist",
-    config = { extra = { energy = 5 } },
-    pos = { x = 8, y = 10 },
-    soul_pos = { x = 9, y = 10 },
-    cost = 9,
-    rarity = "hatch_evolved",
-    blueprint_compat = true,
-    eternal_compat = false,
-    perishable_compat = false,
-    unlocked = false,
-    discovered = false,
-    atlas = 'HatchetJokers',
-
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.energy } }
+        return { vars = { localize(card.ability.extra.type, 'poker_hands'), card.ability.extra.energy } }
     end,
 
     calculate = function(self, card, context)
-        if context.individual and context.cardarea == G.hand and not context.end_of_round then
-            local temp_Mult, temp_ID = 15, 15
-            local raised_card = nil
-            for i = 1, #G.hand.cards do
-                if temp_ID >= G.hand.cards[i].base.id and not SMODS.has_no_rank(G.hand.cards[i]) then
-                    temp_Mult = G.hand.cards[i].base.nominal
-                    temp_ID = G.hand.cards[i].base.id
-                    raised_card = G.hand.cards[i]
-                end
-            end
-            if raised_card == context.other_card then
-                if context.other_card.debuff then
-                    return {
-                        message = localize('k_debuffed'),
-                        colour = G.C.RED
-                    }
-                else
-                    return {
-                        xmult = 2 * temp_Mult
-                    }
-                end
-            end
-        end
-
-        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
-            if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
-                    trigger = 'after',
-                    delay = 0.4,
-                    func = function()
-                        local evolution = card
-                        play_sound('timpani')
-                        card:set_ability("j_raised_fist") -- The Original Joker
-                        card:set_edition()                -- No edition
-                        card:juice_up(0.3, 0.5)
-                        return true
-                    end
-                }))
-                return { -- Devolve Message
-                    message = "Reverted!",
-                    colour = G.C.BLUE
-                }
-            else -- Losing Energy...
-                card.ability.extra.energy = card.ability.extra.energy - 1
-                return {
-                    message = "Losing energy...",
-                    colour = G.C.BLUE
-                }
-            end
-        end
-    end
-
-}
-
--- Divine Space Joker
-SMODS.Joker {
-    key = "divine_space",
-    config = { extra = { energy = 5 } },
-    pos = { x = 0, y = 11 },
-    soul_pos = { x = 1, y = 11 },
-    cost = 9,
-    rarity = "hatch_evolved",
-    blueprint_compat = true,
-    eternal_compat = false,
-    perishable_compat = false,
-    unlocked = false,
-    discovered = false,
-    atlas = 'HatchetJokers',
-
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.energy } }
-    end,
-
-    calculate = function(self, card, context)
-        if context.before then
-            return {
-                level_up = true,
-                message = localize('k_level_up_ex')
-            }
-        end
-
-        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
-            if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
-                    trigger = 'after',
-                    delay = 0.4,
-                    func = function()
-                        local evolution = card
-                        play_sound('timpani')
-                        card:set_ability("j_space") -- The Original Joker
-                        card:set_edition()          -- No edition
-                        card:juice_up(0.3, 0.5)
-                        return true
-                    end
-                }))
-                return { -- Devolve Message
-                    message = "Reverted!",
-                    colour = G.C.BLUE
-                }
-            else -- Losing Energy...
-                card.ability.extra.energy = card.ability.extra.energy - 1
-                return {
-                    message = "Losing energy...",
-                    colour = G.C.BLUE
-                }
-            end
-        end
-    end
-}
-
--- Divine Trousers
-SMODS.Joker {
-    key = "divine_trousers",
-    config = { extra = { xmult = 1, xmult_mod = 0.5, dollars = 4, energy = 5 } },
-    pos = { x = 2, y = 10 },
-    soul_pos = { x = 3, y = 10 },
-    cost = 9,
-    rarity = "hatch_evolved",
-    blueprint_compat = true,
-    eternal_compat = false,
-    perishable_compat = false,
-    unlocked = false,
-    discovered = false,
-    atlas = 'HatchetJokers',
-
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.xmult, card.ability.extra.xmult_mod, card.ability.extra.dollars, card.ability.extra.energy, localize('Two Pair', 'poker_hands') } }
-    end,
-
-    calculate = function(self, card, context) -- Joker Effect
-        if context.before and not context.blueprint and (next(context.poker_hands['Two Pair']) or next(context.poker_hands['Full House'])) then
-            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_mod
-            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.dollars
-            return {
-                dollars = card.ability.extra.dollars,
-                message = localize('k_upgrade_ex'),
-                colour = G.C.RED
-            }
-        end
-        func = function() -- For timing purposes, it runs after the dollar manipulation
+        if context.joker_main and next(context.poker_hands[card.ability.extra.type]) then
             G.E_MANAGER:add_event(Event({
-                func = function()
-                    G.GAME.dollar_buffer = 0
+                func = (function()
+                    add_tag({ key = 'tag_investment' })
+                    play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+                    play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
                     return true
-                end
+                end)
             }))
+            return nil, true -- This is for Joker retrigger purposes
         end
-        if context.joker_main then -- Joker Effect
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_hatch_musketeer") -- The Original Joker
+                        card:set_edition()                    -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Guard
+SMODS.Joker {
+    key = "divine_guard",
+    config = { extra = { xmult = 0.2, energy = 5 } },
+    pos = { x = 4, y = 11 },
+    soul_pos = { x = 5, y = 11 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        local face_tally = 0
+        if G.playing_cards then
+            for _, playing_card in ipairs(G.playing_cards) do
+                if playing_card:is_face {} then face_tally = face_tally + 1 end
+            end
+        end
+        return { vars = { card.ability.extra.xmult, card.ability.extra.xmult * face_tally, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local face_tally = 0
+            for _, playing_card in ipairs(G.playing_cards) do
+                if playing_card:is_face {} then face_tally = face_tally + 1 end
+            end
+            return {
+                xmult = card.ability.extra.xmult * face_tally
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_hatch_royalguard") -- The Original Joker
+                        card:set_edition()                     -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Ritual
+SMODS.Joker {
+    key = "divine_ritual",
+    config = { extra = { discards = 5, energy = 5 } },
+    pos = { x = 6, y = 11 },
+    soul_pos = { x = 7, y = 11 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.discards, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.pre_discard and not context.blueprint and #context.full_hand == 5 then
+            return {
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        SMODS.add_card {
+                            set = 'hatch_sephirot',
+                            edition = 'e_negative'
+                        }
+                        G.GAME.consumeable_buffer = 0
+                        return true
+                    end
+                }))
+            }
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_hatch_ritual") -- The Original Joker
+                        card:set_edition()                 -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Ballot
+SMODS.Joker {
+    key = "divine_ballot",
+    config = { extra = { energy = 5 } },
+    pos = { x = 8, y = 11 },
+    soul_pos = { x = 9, y = 11 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = false,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.joker_main and G.GAME.current_round.hands_played == 0 then
+            for i = 1, #context.full_hand do
+                local percent = 1.15 - (i - 0.999) / (#G.hand.cards - 0.998) * 0.3
+                local target = context.full_hand[i]
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 0.15,
+                    func = function()
+                        target:flip()
+                        play_sound("card1", percent)
+                        target:juice_up(0.3, 0.3)
+                        return true
+                    end,
+                }))
+            end
+            for i = 1, #context.full_hand do
+                local target = context.full_hand[i]
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        target:set_ability("m_hatch_salt")
+                        return true
+                    end,
+                }))
+            end
+            for i = 1, #context.full_hand do
+                local percent = 1.15 - (i - 0.999) / (#G.hand.cards - 0.998) * 0.3
+                local target = context.full_hand[i]
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 0.15,
+                    func = function()
+                        target:flip()
+                        play_sound("card1", percent)
+                        target:juice_up(0.3, 0.3)
+                        return true
+                    end,
+                }))
+            end
+        end
+        if context.end_of_round and context.game_over == false and context.main_eval then -- Devolution
+            if card.ability.extra.energy <= 0 then
+                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local evolution = card
+                        play_sound('timpani')
+                        card:set_ability("j_hatch_spoiledballot") -- The Original Joker
+                        card:set_edition()                        -- No edition
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+                return { -- Devolve Message
+                    message = "Reverted!",
+                    colour = G.C.BLUE
+                }
+            else -- Losing Energy...
+                card.ability.extra.energy = card.ability.extra.energy - 1
+                return {
+                    message = "Losing energy...",
+                    colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+-- Divine Tree
+SMODS.Joker {
+    key = "divine_tree",
+    config = { extra = { xmult = 1, xmult_mod = 0.2, energy = 5 } },
+    pos = { x = 0, y = 12 },
+    soul_pos = { x = 1, y = 12 },
+    cost = 11,
+    rarity = "hatch_evolved",
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = false,
+    atlas = 'HatchetJokers',
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xmult, card.ability.extra.xmult_mod, card.ability.extra.energy } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.remove_playing_cards and not context.blueprint then
+            card.ability.extra.xmult = card.ability.extra.xmult + (card.ability.extra.xmult_mod * #context.removed)
+            return {
+                message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.xmult } }
+            }
+        end
+        if context.joker_main then
             return {
                 xmult = card.ability.extra.xmult
             }
@@ -3918,8 +5195,8 @@ SMODS.Joker {
                     func = function()
                         local evolution = card
                         play_sound('timpani')
-                        card:set_ability("j_trousers") -- The Original Joker
-                        card:set_edition()             -- No edition
+                        card:set_ability("j_hatch_fallentree") -- The Original Joker
+                        card:set_edition()                     -- No edition
                         card:juice_up(0.3, 0.5)
                         return true
                     end
@@ -3950,7 +5227,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
-    unlocked = false,
+    unlocked = true,
     discovered = false,
     atlas = 'HatchetJokers',
 
