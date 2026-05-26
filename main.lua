@@ -1,4 +1,4 @@
-Hatchet = SMODS.current_mod
+HATCH = SMODS.current_mod
 
 --ATLASES
 SMODS.Atlas({
@@ -97,6 +97,7 @@ assert(SMODS.load_file("src/backs.lua"))()
 assert(SMODS.load_file("src/blinds.lua"))()
 assert(SMODS.load_file("src/boosters.lua"))()
 assert(SMODS.load_file("src/challenges.lua"))()
+assert(SMODS.load_file("src/crossmod.lua"))() -- crossmod content
 assert(SMODS.load_file("src/divine.lua"))()
 assert(SMODS.load_file("src/editions.lua"))()
 assert(SMODS.load_file("src/enhancements.lua"))()
@@ -106,7 +107,7 @@ assert(SMODS.load_file("src/sephirot.lua"))()
 assert(SMODS.load_file("src/sounds.lua"))()
 assert(SMODS.load_file("src/stakes.lua"))()
 assert(SMODS.load_file("src/stickers.lua"))()
-assert(SMODS.load_file("src/crossmod.lua"))()
+assert(SMODS.load_file("src/ui.lua"))()
 
 -- Consumable Definitions
 SMODS.ConsumableType {
