@@ -185,14 +185,3 @@ SMODS.Challenge {
         }
     },
 }
-
--- Testing Deck
-SMODS.Challenge {
-    key = 'testingdeck',
-    jokers = {
-        { id = 'j_oops',             eternal = true, edition = 'negative' },
-        { id = 'j_oops',             eternal = true, edition = 'negative' },
-        { id = 'j_oops',             eternal = true, edition = 'negative' },
-        { id = 'j_oops',             eternal = true, edition = 'negative' },
-    },
-}
