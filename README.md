@@ -1,5 +1,7 @@
 # Hatchet
-A content-based Balatro mod!
+## [Youtube Trailer](https://github.com/cosmeggo/Hatchet/)
+
+Hatchet is a content-based Balatro mod created by yours truly!
 
 ![image](https://raw.githubusercontent.com/cosmeggo/EndlessFlow-Art/refs/heads/main/hatchetscreens/screenie1.png)
 ![image](https://raw.githubusercontent.com/cosmeggo/EndlessFlow-Art/refs/heads/main/hatchetscreens/screenie2.png)
