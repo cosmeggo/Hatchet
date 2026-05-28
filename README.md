@@ -1,5 +1,5 @@
 # Hatchet
-## [Youtube Trailer](https://github.com/cosmeggo/Hatchet/)
+## [Youtube Trailer](https://www.youtube.com/watch?v=1pzgj5baMUE/)
 
 Hatchet is a content-based Balatro mod created by yours truly!
 
