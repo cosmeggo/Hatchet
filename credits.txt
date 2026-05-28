@@ -4,10 +4,17 @@ cosmeggo
 
 == Art ==
 
-cassknows (Creator of the Divine shader)
+cassknows
+LasagnaFelidae
+Jewel Sparkles
+Inky
+
+== Playtesting ==
+Korn
 
 == Programming Help ==
 
+Metanite64
 N'
 NopeTooFast
 ThunderEdge
@@ -15,7 +22,6 @@ nh6574
 Eremel
 Eris
 Somethingcom515 (Seals On Every)
-metanite64
 FreindlyBear
 srockw
 unusedparadox

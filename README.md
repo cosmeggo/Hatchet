@@ -15,3 +15,7 @@ This mod requires [Steamodded](https://github.com/Steamodded/smods/releases/late
 ...and more!
 
 ## [Discord Server](https://discord.gg/hGwkjwUV9V)
+
+## Known Bugs
+- The "Enable Divine Shader" setting has not been fully programmed correctly.
+- An unknown sound based bug that I cannot recreate
