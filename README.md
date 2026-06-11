@@ -1,7 +1,5 @@
 # Hatchet
-## [Youtube Trailer](https://www.youtube.com/watch?v=1pzgj5baMUE/)
-
-Hatchet is a content-based Balatro mod created by yours truly!
+A content-based Balatro mod!
 
 ![image](https://raw.githubusercontent.com/cosmeggo/EndlessFlow-Art/refs/heads/main/hatchetscreens/screenie1.png)
 ![image](https://raw.githubusercontent.com/cosmeggo/EndlessFlow-Art/refs/heads/main/hatchetscreens/screenie2.png)
@@ -14,7 +12,6 @@ This mod requires [Steamodded](https://github.com/Steamodded/smods/releases/late
 - 20+ Consumables
 - 4 Decks
 - 4 Boss Blinds
-
 ...and more!
 
 ## [Discord Server](https://discord.gg/hGwkjwUV9V)
