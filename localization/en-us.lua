@@ -30,6 +30,18 @@ return {
                     "and {C:attention}#2#{}",
                 },
             },
+            b_hatch_numinous = {
+                name = "Numinous Deck",
+                text = {
+                    "{C:dark_edition}Divine{} cards",
+                    "may appear in the shop",
+                },
+                unlock = {
+                    "Win a run with any",
+                    "deck on at least",
+                    "{V:1}#1#{} difficulty",
+                }
+            },
         }, -- Blinds start below
         Blind = {
             bl_hatch_axe = {
@@ -1200,7 +1212,7 @@ return {
                 name = "Divine Swashbuckler",
                 text = {
                     {
-                        "{C:white,X:mult}X#1#{} Mult per {C:money}dollar{}",
+                        "{C:white,X:mult}X#4#{} Mult per {C:money}dollar{}",
                         "of sell value of all other",
                         "{C:attention}Jokers{} owned",
                         "{C:inactive}(Currently {C:white,X:mult}X#2#{C:inactive} Mult)",
