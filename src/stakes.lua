@@ -53,7 +53,7 @@ SMODS.Stake {
 
 -- Vernal Stake
 SMODS.Stake {
-    name = "VernaL Stake",
+    name = "Vernal Stake",
     key = "vernal",
     prefix_config = {  applied_stakes = { mod = false } },
     applied_stakes = { "hatch_abyssal" },
@@ -73,7 +73,7 @@ SMODS.Stake {
     name = "Ethereal Stake",
     key = "ethereal",
     prefix_config = {  applied_stakes = { mod = false } },
-    applied_stakes = { "hatch_verdant" },
+    applied_stakes = { "hatch_vernal" },
     pos = { x = 0, y = 1 },
     sticker_pos = { x = 0, y = 1 },
     atlas = 'HatchetStakes',

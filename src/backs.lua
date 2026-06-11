@@ -60,3 +60,31 @@ SMODS.Back {
         }
     end
 }
+
+-- Numinous Deck
+SMODS.Back {
+    key = 'numinous',
+    pos = { x = 4, y = 0 },
+    config = { divine_rate = 4 },
+    unlocked = false,
+    atlas = 'HatchetDecks',
+
+    apply = function(self, back)
+        -- Apply the spectral rate
+        G.GAME.hatch_divine_rate = self.config.divine_rate
+    end,
+    loc_vars = function(self, info_queue, back)
+        return { vars = { self.config.divine_rate } }
+    end,
+    locked_loc_vars = function(self, info_queue, back)
+        return {
+            vars = {
+                localize { type = 'name_text', set = 'Stake', key = 'stake_gold' },
+                colours = { get_stake_col(8) }
+            }
+        }
+    end,
+    check_for_unlock = function(self, args)
+        return args.type == 'win_stake' and get_deck_win_stake() >= 8
+    end
+}

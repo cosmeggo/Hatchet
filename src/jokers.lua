@@ -1043,7 +1043,7 @@ SMODS.Joker {
 -- Witch
 SMODS.Joker {
     key = "witch",
-    config = { extra = { xmult = 1, xmult_gain = 0.2 } },
+    config = { extra = { xmult = 1, xmult_gain = 0.1 } },
     pos = { x = 8, y = 2 },
     cost = 9,
     rarity = 3,
@@ -4326,7 +4326,7 @@ SMODS.Joker {
                 sell_cost = sell_cost + joker.sell_cost
             end
         end
-        return { vars = { card.ability.extra.xmult, card.ability.extra.xmult + (card.ability.extra.xmult_mod * sell_cost), card.ability.extra.energy } }
+        return { vars = { card.ability.extra.xmult, card.ability.extra.xmult + (card.ability.extra.xmult_mod * sell_cost), card.ability.extra.energy, card.ability.extra.xmult_mod } }
     end,
 
     calculate = function(self, card, context)
