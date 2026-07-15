@@ -185,3 +185,49 @@ SMODS.Challenge {
         }
     },
 }
+
+-- Tree of Life
+SMODS.Challenge {
+    key = 'treeoflife',
+    jokers = {
+        { id = 'j_hatch_etzchaim', eternal = true, edition = 'negative' },
+        { id = 'j_cartomancer', eternal = true, edition = 'negative' },
+    },
+    consumeables = {
+        { id = 'c_fool' },
+    }
+}
+
+-- Ethereal Chevron Needle
+SMODS.Challenge {
+    key = 'etherealchev',
+    rules = {
+        custom = {
+            { id = 'discard_cost', value = 1 },
+            { id = 'no_reward_specific', value = 'Small' },
+            { id = 'no_reward_specific', value = 'Big' },
+        },
+        modifiers = {
+            { id = 'hands',    value = 1 },
+            { id = 'discards', value = 6 },
+            { id = 'dollars',  value = 10 },
+            { id = 'hand_size', value = 5 },
+        }
+    },
+    jokers = {
+        { id = 'j_credit_card' },
+        { id = 'j_joker', perishable = true },
+    },
+    restrictions = {
+        banned_cards = {
+            { id = 'j_burglar' },
+            { id = 'v_grabber' },
+            { id = 'v_nacho_tong' },
+        }
+    },
+    apply = function(self)
+        G.GAME.win_ante = 10
+        G.GAME.modifiers.enable_hatch_burdened = true
+        G.GAME.modifiers.scaling = (G.GAME.modifiers.scaling or 3) + 3
+    end,
+}

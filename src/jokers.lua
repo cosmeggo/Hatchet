@@ -1646,7 +1646,7 @@ SMODS.Joker {
 -- Giraffe
 SMODS.Joker {
     key = "giraffe",
-    config = { extra = { chips = 75 } },
+    config = { extra = { chips = 75, vouchers = 0 } },
     pos = { x = 4, y = 4 },
     cost = 9,
     rarity = 3,
@@ -1658,7 +1658,7 @@ SMODS.Joker {
     atlas = 'HatchetJokers',
 
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.chips, card.ability.extra.chips * (#G.vouchers.cards) } } -- this joker currently lacks chip count localisation
+        return { vars = { card.ability.extra.chips } } -- this joker currently lacks chip count localisation
     end,
     calculate = function(self, card, context)
         if context.buying_card and context.card.ability.set == "Voucher" then -- credit to N'
