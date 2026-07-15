@@ -513,7 +513,6 @@ return {
                     "Gain {C:chips}+#1#{} Chips",
                     "per {C:attention}voucher{}",
                     "redeemed this run",
-                    "{C:inactive}(Currently {C:blue}+#2#{C:inactive} Chips)"
                 },
             },
             j_hatch_fourleaf = {
@@ -1722,6 +1721,8 @@ return {
             c_hatch_stockmarket = "Stock Market",
             c_hatch_skyhigh = "Sky High",
             c_hatch_blindspot = "Blind Spot",
+            c_hatch_treeoflife = "Tree of Life",
+            c_hatch_etherealchev = "Ethereal Chevron Needle",
         },
         dictionary = {
             b_hatch_sephirot_cards = "Sephirot Cards",
