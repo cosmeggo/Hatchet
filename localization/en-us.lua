@@ -373,9 +373,12 @@ return {
             j_hatch_witch = {
                 name = "Witch",
                 text = {
-                    "This Joker gains {C:white,X:mult}X#2#{} Mult",
-                    "for every {C:attention}unplayed hand{}",
-                    "{C:inactive}(Currently {C:white,X:mult}X#1#{} {C:inactive}Mult)"
+                    {
+                        "This Joker gains {C:white,X:mult}X#2#{} Mult",
+                        "for every {C:attention}unplayed hand{}, resets",
+                        "when {C:attention}Boss Blind{} is defeated",
+                        "{C:inactive}(Currently {C:white,X:mult}X#1#{} {C:inactive}Mult)"
+                    },
                 },
             },
             j_hatch_blackswan = { -- Idea by M0Xes
@@ -1249,7 +1252,7 @@ return {
                 text = {
                     {
                         "{C:white,X:mult}X#1#{} Mult per",
-                        "{C:attention}Enhanced card{}", 
+                        "{C:attention}Enhanced card{}",
                         "in {C:attention}deck{}",
                         "{C:inactive}(Currently {C:white,X:mult}X#2#{C:inactive} Mult)",
                     },
@@ -1710,6 +1713,15 @@ return {
                     "{C:attention}#2#{C:dark_edition} Divine{} cards to",
                     "be used immediately",
                 },
+            },
+        }, -- Sleeves starts below
+        Sleeve = {
+            sleeve_hatch_chevron = {
+                name = "Chevron Sleeve",
+                text = {
+                    "{C:attention}-2{} hand size",
+                    "{C:red}+2{} discards every round"
+                }
             },
         }
     },
