@@ -1043,7 +1043,7 @@ SMODS.Joker {
 -- Witch
 SMODS.Joker {
     key = "witch",
-    config = { extra = { xmult = 1, xmult_gain = 0.1 } },
+    config = { extra = { xmult = 1, xmult_gain = 0.2 } },
     pos = { x = 8, y = 2 },
     cost = 9,
     rarity = 3,
@@ -1060,10 +1060,22 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
-            -- See note about SMODS Scaling Manipulation on the wiki
-            card.ability.extra.xmult = card.ability.extra.xmult +
-                (card.ability.extra.xmult_gain * G.GAME.current_round.hands_left)
-            return { message = localize('k_upgrade_ex') }
+            if context.beat_boss and card.ability.extra.xmult > 1 then
+                card.ability.extra.xmult = 1
+                return {
+                    message = localize('k_reset'),
+                    colour = G.C.RED
+                }
+            end
+            if not context.beat_boss then
+                card.ability.extra.xmult = card.ability.extra.xmult +
+                    (card.ability.extra.xmult_gain * G.GAME.current_round.hands_left)
+                return {
+                    message = localize('k_upgrade_ex'),
+                    colour = G.C.RED
+
+                }
+            end
         end
         if context.joker_main then
             return {
@@ -3337,7 +3349,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -3392,7 +3404,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -3447,7 +3459,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -3517,7 +3529,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -3590,7 +3602,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -3649,7 +3661,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -3713,7 +3725,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -3769,7 +3781,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -3827,7 +3839,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -3899,7 +3911,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -3962,7 +3974,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4028,7 +4040,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4083,7 +4095,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4140,7 +4152,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4212,7 +4224,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4277,7 +4289,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4344,7 +4356,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4406,7 +4418,7 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4461,7 +4473,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4531,7 +4543,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4593,7 +4605,7 @@ SMODS.Joker({
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4660,7 +4672,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4729,7 +4741,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4791,7 +4803,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4850,7 +4862,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4911,7 +4923,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -4976,7 +4988,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -5040,7 +5052,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -5128,7 +5140,7 @@ SMODS.Joker {
         end
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
@@ -5189,7 +5201,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then -- Devolution
             if card.ability.extra.energy <= 0 then
-                G.E_MANAGER:add_event(Event({                                             -- Devolve Effect
+                G.E_MANAGER:add_event(Event({                                                                       -- Devolve Effect
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
