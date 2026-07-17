@@ -92,6 +92,15 @@ SMODS.Atlas({ -- Crossmod Content
     atlas_table = "ASSET_ATLAS"
 })
 
+SMODS.Atlas({ -- Crossmod Content
+    key = "HatchetCrossSleeves", 
+    path = "HatchetCrossSleeves.png", 
+    px = 73,
+    py = 95, 
+    atlas_table = "ASSET_ATLAS"
+})
+
+
 --loading src files
 assert(SMODS.load_file("src/backs.lua"))()
 assert(SMODS.load_file("src/blinds.lua"))()
@@ -107,7 +116,7 @@ assert(SMODS.load_file("src/sephirot.lua"))()
 assert(SMODS.load_file("src/sounds.lua"))()
 assert(SMODS.load_file("src/stakes.lua"))()
 assert(SMODS.load_file("src/stickers.lua"))()
-assert(SMODS.load_file("src/ui.lua"))()
+-- assert(SMODS.load_file("src/ui.lua"))()
 
 -- Consumable Definitions
 SMODS.ConsumableType {
