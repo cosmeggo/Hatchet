@@ -14,7 +14,5 @@ This mod requires [Steamodded](https://github.com/Steamodded/smods/releases/late
 - 4 Boss Blinds
 ...and more!
 
-## [Discord Server](https://discord.gg/hGwkjwUV9V)
-
 ## Known Bugs
 - Da'at may appear in Spectral Packs.
